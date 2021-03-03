@@ -1,0 +1,109 @@
+<!DOCTYPE hmtl>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="https://use.fontawesome.com/d1341f9b7a.js"></script>
+		<link rel="stylesheet" href="style.css">
+		<title> IAT 848 project</title>
+	</head>
+	<body>
+		<div class="topnav">
+			<a class="active" href="index.html">Home</a>
+			<a href="Publications.html">Publications</a>
+			<a href="IAT-848-Project.html">IAT 848 course project</a>
+			<a href="IAT-848-Project-design.html">IAT 848 course project design</a>
+		</div>
+		<div class="box1">
+			</center><h1> VRmagination</h1></center>
+			<h1> Mahdi Davoodikakhki </h1>
+			<h1> Professor Steve DiPaola </h1>
+			
+			<h2>Introduction</h2>
+			<p>&nbsp;&nbsp;This project is about making an interactive 3D scene generation program. It aims to create 3D scenes and environments in Virtual Reality(VR) platforms. 
+			In this project, we tend to get the user voice input and use a speech recognition system to convert the user speech to text. We then use some techniques and deep neural network models
+			from Natural Language Processing (NLP) to convert the user input to a 3D scene .</p>
+			<p> The final output of this project can be used for visualising the people imagination. People can see their idea in a 3D environment and then investigate it in a 3D virual world using a VR headset.
+			<p>This project can be completed in four steps. First, we can detect some keywords linked to certain models and instantiate the requested models where the user asks for them. Second, We should try 
+			to get the whole sentences from users and understand and build the semantic graphs coming from the users.
+			Third, adding a dialogue system between the users and the scene generator. With this dialogue, users would be able to ask for some changes, such as changing the scale, rotation, color, 
+			and position of objects. Fourth, with having a large 3D dataset model, users can ask for some different type of the instantiated models.</p>
+			
+			<h2>Project Description</h2>
+			<p> We implement our project in Unity environment and use the provided API and Asset from Facebook Oculus. Users can move freely in this environment and explore the scene. Users can select or specify
+			instantiation position by using the handset in their hand. They can also send their commands to the game by talking and giving instructions about the objects and their relations. </p>
+			
+			<p> Users instruction include instantiating simple or multiple objects, modyfing them, or even changing the instantiated objects based on their idea. In case the four phases could be completed faster, we plan 
+			to add physics and add some simulated moving commands for the movable objects, such as vehicles and people.</p>
+			
+			<h2>Key Features </h2>
+			<p> The key features in our project is having a big and wide set of 3D models to give a good freedom to the users for chossing models and design scenes as they wish. We mainly focus on using free assets 
+			from Unity Asset store, but we may also use some other models from Google Poly or Free 3D websites.</p>
+			<p> Our project's user experience can be enhanced by adding physics to our scene and make the vehicles or even character move in the environemnt. This makes our simple game more intersting especially for kids.
+			We can also add some speciall sounds to the objects in our environment to make them more believable and give a better experience to the users. Besides, adding sounds to our game specially to the vehicles is another 
+			possible improvement to our project.</p>
+			
+			<h2> Genre </h2>
+			<p>We can claim that our project is actually a game, but it is just a fun game without any goal or objective and also it does not have any story or narration.</p>
+			
+			
+			
+			<h2>Concept Art</h2>
+			<p>As mentioned previously, our game does not have a story line or a particular level design, we add a ray at the end of the right side handset, so that the user can select the point he wants to instantiate a model
+			or they can select or point to an instantiated object to modify or replace it with another objects.</p>
+			
+			<h2>Timeline</h2>
+			<p> Our project has four phases. The first phase is already finished on February 9. For second phase we have a speech recognition and a model that can split sentences with some pre-defined words, but it still needs
+			some improvements and debugging. The second step, which is just defining a simple scene should be finished until March 10, and the third and fourth steps should be finished until March 24 and April7.  </p>
+			
+			<h2>Team Members and Roles</h2>
+			<p>&nbsp;&nbsp;The team for doing this project has just one student, named Mahdi Davoodikakhki, and he gets guidelines from Professor DiPaola, who is the course instructor and his supervisor.
+			Therefore, Mahdi is the responsible person for implementing the codes, design, writing reports, and other roles.</p>
+			
+			<h2> Implementing the Project</h2>
+		
+			<p> In this project, we split the user input sentence with some positional words, such as right, front, etc. Then for each splitted chunk of our sentences, we will try to find the nearest sentence to
+			one of the pre-defined sentences. These pre-defined sentences are the description of each of our models. With having the most probable requested models, we will instantiate the requested models, but 
+			we have to understand the positional relationships between the sentences to place them correctly in our 3D scene. We should also define some Vectors or other meaningful representation of these positional
+			words inorder to translate them into 3D world meanings.</p>
+			
+			
+			<p> After adding the ability to instantiate models and creating 3D scenes, we will aim to add the ability for modifying the scene, such as changing the models scale, moving them, or rotating them. In the next
+			phase users may also ask for some other models to be replaced by the current instantiated mode. To do that, we have understand what is the exact model or object that the user is talking about and then we 
+			should consider the most known and usable modifications to our scene.</p>
+			
+			<p> &nbsp;&nbsp; We have two suitable software for implementing this project. The first one is the Unity game engine, which has a proper documentation and also a great asset store that can help us
+			with finding the 3D models for implementing the project. The second solution is using Tivoli Cloud VR software. 
+			It seems to be an easier solution overall but for now, its documentation is not very clear as it is a rather new platform and it does not have a dataset of 3D models, 
+			but it can easily gather people in an interactive environment, which is a quite worthy advantage for using that.</p>
+			<p> We plan to try implementing things in Tivoli Cloud VR to test its abilities and take advantage of its interactive environment, but we will use Unity game engine as a backup software to finish the project in case
+			things do not go as planned for this project on Tivoli Cloud VR.</p>
+			<h2>Sketches and ideas</h2>
+			<p> &nbsp;&nbsp; Here, we show a few sketches from the possible outcome of each step. Please note that the first step is done partially and the next steps sketches are created manually.</p>
+			<video width="960" height="540" controls>
+			  <source src="Proposal1.mp4" type="video/mp4">
+			</video>
+			<div class="vcaption">
+				<p>The current output of the first step.</p>
+			</div>
+			<img width="960" src="sketch2.png"></img>
+			<div class="vcaption">
+				<p>First step output after asking to instantiate car, house, helicopter, and police car by pointing with handset.</p>
+			</div>
+			<img width="960" src="sketch1.png"></img>
+			<div class="vcaption">
+				<p>Second step scene similar to the first step scene. Showing the output after saying "put two cars left to a helicopter and next to a house".</p>
+			</div>
+			<img width="960" src="sketch3.png"></img>
+			<div class="vcaption">
+				<p>Third step output after saying "rotate the car 90 degrees."</p>
+			</div>
+			<img width="960" src="sketch4.1.png"></img>
+			<div class="vcaption">
+				<p>Fourth step output after saying "replace the car with a small cartoon car".</p>
+			</div>
+			
+		</div>
+		
+	</body>
+
+</html>
