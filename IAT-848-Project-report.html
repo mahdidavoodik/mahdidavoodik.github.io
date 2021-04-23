@@ -1,0 +1,207 @@
+<!DOCTYPE hmtl>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="https://use.fontawesome.com/d1341f9b7a.js"></script>
+		<link rel="stylesheet" href="style.css">
+		<title> IAT 848 project</title>
+	</head>
+	<body>
+		<div class="topnav">
+			<a href="index.html">Home</a>
+			<a href="Publications.html">Publications</a>
+			<a href="IAT-848-Project.html">IAT 848 course project</a>
+			<a href="IAT-848-Project.html">IAT 848 course project design</a>
+			<a class="active" href="IAT-848-Project-Report.html">IAT 848 course project report</a>
+
+		</div>
+		<div class="box1">
+			<img width="960" src="Title.png"></img>
+			<br/><br/><br/><br/><br/><br/><br/><br/>
+			<h1> VRmagination</h1>
+			<h1> Mahdi Davoodikakhki </h1>
+			<h1> Professor Steve DiPaola </h1>
+			<br/><br/><br/><br/><br/><br/><br/><br/>
+			
+
+
+			
+			<h2>Introduction</h2>
+			<p>&nbsp;&nbsp;This project is about making an interactive 3D scene generation program. It aims to create 3D scenes and environments in Virtual Reality(VR) platforms. 
+			In this project, we tend to get the user voice input and use a speech recognition system to convert the user speech to text. We then use some techniques and deep neural network models from Natural Language Processing (NLP) to convert the user input to a 3D scene.</p>
+			<p> The final output of this project can be used for visualizing people imagination. People can see their idea in a 3D environment and then investigate it in a 3D virtual world using a VR headset.
+			<p> We have defined four phases to complete this project. In the first phase, we detect some keywords linked to certain models and instantiate the requested models where the user asks for them. In the second one, we should try to get the whole sentences from users and understand and build the semantic graphs coming from the users. In the third one, we add an intelligent system hearing the user's complicated commands. With that, users would be able to ask for some changes, such as changing the scale, rotation, color, and position of objects. In the last phase, we first make a rather big dataset of 3D models, and then with updating the system from the previous phase, users can ask for some different types of the instantiated models.</p>
+			
+			<h2>Project Description</h2>
+			<p> &nbsp;&nbsp; We implement our project in the Unity Game Engine environment and use the provided API and Unity Asset from Facebook Oculus. Users can move freely in this environment and explore the scene. They can select or specify instantiation position by using the handset in their hands. They can also send their commands to the game by talking and giving instructions about the objects and their positon relations. </p>
+			
+			<p> Users' instructions include instantiating simple or multiple objects by describing their position and situation regarding each other, modifying them, or even changing the instantiated objects based on their wishes. We plan to add physics and add some simulated moving commands for the movable objects, such as vehicles and people in future. We may also be able to transfer our project to Tivoli VR as well.</p>
+			
+			<h2>Key Features </h2>
+			<p> &nbsp;&nbsp; The key feature in our project is having a big and wide set of 3D models to give suitable freedom to the users for choosing models and design scenes as they wish. We mainly focus on using free assets from the Unity Asset Store, but we may also use some other models from Google Poly or Free 3D model provider websites. We have added a link to the models we have used from the Unity asset store in the References and we will update them over time [1,2,3,4,5,6]. To understand the user's input we may also use our designed sentence embedder, Bert-sentence[7], or GPT-3[8] models. For now, we plan to use the Bert-sentence embedder. Currently our designed sentence embedder is based on GloVe[9]</p>
+			<p> Our project's user experience can be enhanced by adding physics to our scene and make the vehicles or even characters move in the environment. This makes our simple game more interesting, especially for kids. We can also add some special sounds to the objects in our environment to make them more believable and give a better experience to the users. Besides, adding sounds to our game especially to the vehicles is another possible improvement for our project.</p>
+			
+			<h2> Genre </h2>
+			<p> &nbsp;&nbsp; Our project is actually a game, but it is just a casual, interactive and entertaining game without any goal or objectives, and also it does not have any story or narration. It can be improved by adding a multiplayer mode so that all users can interact with the objects in the environment at the same time.</p>
+			
+			
+			
+			<h2>Concept Art</h2>
+			<p>&nbsp;&nbsp; As mentioned previously, our game does not have a storyline or a particular level design. In the beginning, users will see a wide brown colored plane representing a terrain covered with soul. As we are creating this project for Oculus Quest 2 for now, We add a ray at the end of the right handset, so that the users can select the point they want to instantiate a model or they can select or point to an instantiated object to modify or replace it with another object.</p>
+			
+			<h2>Timeline</h2>
+			<p> &nbsp;&nbsp; Our project has four phases. The first phase is already finished on February 2. The second phase finished by  March 10, and the third and fourth phases finished on March 30 and April 14. Videos showing the implemented phases and what we expect from the next phases are provided in the <i>Sketches and Idea</i> section </p>
+			
+			<img width="960" src="timeline.png"></img>
+			<div class="vcaption">
+				<p>Project timeline for the defined four phases.</p>
+			</div>
+
+			<h2>Team Members and Roles</h2>
+			<p>&nbsp;&nbsp;The team for doing this project has just one student, named Mahdi Davoodikakhki, and he gets guidelines from Professor DiPaola, who is the course instructor and his supervisor. Therefore, Mahdi is the responsible person for implementing the codes, design, writing reports, defining timelines, and other roles.</p>
+			
+			<h2> Implementing the Project</h2>
+		
+			<h2>Method</h2>
+			<p>People may say a command in many different ways, so we have to find a solution to understand these different commands and perform the correct actions. We have also used Unity Game engine for implementing our project as it is capable of showing the user command results in real-time.</p>
+			<h3>Approach</h3>h
+			<p>There is also one minor issue that people do not use the same verb for consecutive subsentences. To solve this problem, if we do not find a verb in a subsentence, we add the previous subsetence's verb to it to change the subsentences in a way that makes more sense. If the first subsentence does not have a verb at all, we add a "put" verb to its beginning. For example the sentence: "a car here in front of a house and rotate the bench 90 degrees" would be divided into subsentences of (a car here, a house, rotate the bench 90 degrees) and then refined to (put a car here, put a house, rotate the bench 90 degrees).</p>
+
+			<p>For finding the similarity between the sentences, we could define only a set of commands and ask the users to only use those commands, but we want to make our project intelligent in the sense that the users can use several different sentences, verbs, and 3D model names to express what they want to be done in the scene. To achieve this intelligence, we should convert the model words, verbs, and sentences into numbers. In other words, we embed the text inputs and when we want to find the similarities, we normalize the embedding vectors and compute the dot product result between them, the more the dot product between the two sentences is the more sentences are similar. We have implemented the base code in Python for finding similar sentences and finding the actions as the result. Furthermore, as we support numbers in the user command, after finding the most similar subsentence, we will extract the number used in the user sentence and use it for modifying the 3D objects in our environment based on the subsentence.</p>
+			<h3>Implementation</h3>
+			<p>TCP host in Python that receives the subsentences and sends back the subsentences type and 3D model indices as the output to the TCP client implemented in the Unity game engine. To be more precise, in Unity we get the user voice input and use Microsoft's dictation included in Unity by the Unity's developer to process it to convert it to text. Then we send the whole sentence to get the overall type of the sentence. With having the sentence type, we split the sentence into several subsentences and send them back to the implemented project in Python to get the subsentences' type and 3D model indices as numbers.</p>
+			<p>In Unity, when we want to add a new 3D model to the available models we have, we define a unique index for it, then we add one or more colliders to it that define the borders for each object, which is used when we want to put other objects around or on top of it. We also set and choose a material for each model that is used for changing its color when the user asks for it. For some 3D models the model's front, right, and top vectors are not defined correctly, so for them we have to define a new pivot and direction to place them correctly in the scene. We acknowledge that we have not created any 3D model, and we have only used the ready 3D models from Unity Asset store.</p>
+
+			<p>For embedding the text inputs, we have tried using different sentence embedders such as our trained neural network model, Bert-base-nli-mean-tokens, and Universal Sentence Encoder from Google. Our trained model is a Recurrent Neural Network(RNN), which we feed it with the word embeddings and expect to get the sentence's word embeddings in turn. The second sentence embedder, bert-base-nli-mean-tokens, computes the average of the Bert word embeddings of the sentence. Universal Sentence Encoder from Google is an encoder designed by Google, which we have found to be more accurate between these methods, and therefore we have chosen it as our sentence embedder for this step.</p>
+
+			<p>When we receive the numbers and indices from our python project showing the commands, we can detect the sentence type and if the command is a "put" type command with multiple 3D models, we have to place them in a way that they do not collide with each other. To do so we start from the last model in reverse order and store and move the instantiating point based on the positional words in the sentence and each objects size. We also assume that the last 3D model is instantiated on the point defined by the ray coming out of the VR controller, but if the user uses the keyword "here" for a model we put that particular model on the pointed position and place the other models based on that. To do so we use an offset point in the world that shifts all the models to place them in a correct manner in the scene.</p>
+			<p>There is also another problem here. When the instantiated 3D model places are described using vertical positional words such as below, under, over, etc. we have to take care that the models do not go into the floor. To do so we use another offset point in the 3D world that is responsible to shift the models vertically to place them correctly in the scene.</p>
+
+
+			<h2>Detailed workflow</h2>
+			<p>As mentioned before, we implemented our project in four phases, in the first phase, we designed a system that could instantiate a 3D model by saying keywords. In the second phase, we implemented a system that could instantiate multiple 3D models together in one sentence that describes the relationship between them. In the third phase, we improved our system to make it able to modify the models, such as resizing, moving, rotating, and changing their color. The last phase is replacing the instantiated models with the ones that the user asks for. For implementing this part we made an array of lists that is responsible for keeping track of the instantiated models. Each list holds all instances of a 3D model type and when the user talks about a model, the changes are made to the last model.</p>
+			 
+
+			<p>We have left two more improvements for future work. The first improvement is having the ability for selecting some 3D models to be modified with the controller instead of modifying and replacing the last model. The second one is using some captioning systems using neural networks to get more details for each model. We do this for improving the model selection accuracy. We can also use this system to have a loop to refine the model creation and placements in the future. It is worth mentioning that we tried to use the Densecap as one of the most popular image captioner models, but we found out that it has the tendency to talk more about the general type of the objects and their colors and it does not mention the properties and attributes of the objects available in the picture.</p>
+
+			<p>The biggest issue we had in our project was implementing a neural network model with acceptable performance for designing the scenes and understanding the user input. We tried to tackle this problem by designing our neural network models and finding a better word and sentence embeddings and using them with defining the sample sentences in different ways to help the algorithm in finding the most similar sentences and 3D model indices. </p>
+
+			<h2>Components of the VR application</h2>
+			<p>Since we have used the Unity Game engine and Oculus 2 VR headset, we did not have to solve too many problems as the Oculus has provided an Asset for using their headset in Unity, which provides the camera placement based on the user movement and supports full orientation and position for the controllers, which was a great start for us as we could focus more on implementing our core project and the graphical scene generator and designing the 3D objects prefab in Unity.</p>
+
+			<h2>Future work</h2>
+
+			<p>To improve the user command interpretation, we plan to try the GPT-3 as it can perceive the text very well and report the extracted information in the requested format. We may still try to train our network to gain a good system, which is designed particularly for us. To have a good system, we need to have enough data to train our neural model. To collect the differt users input and how they express modification, changes and scenes we can create some 3D environments in a browser environment to get and store different and several people inputs to use them for the learning process.</p>
+
+			<p>Besides, we may create our image captioner or find a better one than DenseCap to improve the 3D model descriptions. To increase the environment interactivity we plan to enable modifying multiple objects with just one command and even the environment attributes such as the color, theme, time of the day in the environment, and toggling physics simulation on or off could be modified with commands in the future. We will also use a better speech recognition system in the future to convert the user's voice input to text better and more accurate. One better option for speech recognition is Google Cloud service.</p>
+
+			<p>Moreover, considering the newly released Tivoli Could VR, which can easily visualize and modify different concepts and share them among different people present in the same environment, we may transform our project into this application to have more interactivity between different users. Tivoli Could VR is also capable of supporting both the VR headsets and personal computers that makes it a perfect option for a possible base engine for our application. Regardless of the base engine, we have the plan to make a large dataset of 3D models. To do so we can use several 3D models sources such as Unity Asset Store, CadNav, and CGTrader, which provide many free and paid 3D models. We also have the intention to add the ability for the users to add some life and movement to the scenes by giving some commands regarding particular 3D objects such as vehicles, animals, and people available in the scene, and observe them moving them in a natural manner in the scene to improve the user experience.</p>
+			
+			<h2>Sketches and ideas</h2>
+			<p> &nbsp;&nbsp; Here, we show a few sketches from the expected outcome of each phase and the actual output while we were trying to implement our project.</p>
+			<video width="960" height="540" controls>
+			  <source src="Proposal1.mp4" type="video/mp4"f>
+			</video>
+			<div class="vcaption">
+				<p>The current output of the first phase.</p>
+			</div>
+
+			<video width="960" height="540" controls>
+			  <source src="Phase2.mp4" type="video/mp4">
+			</video>
+			<div class="vcaption">
+				<p>The current output of the second phase.</p>
+			</div>
+
+			<video width="960" height="540" controls>
+			  <source src="Phase2 complete.mp4" type="video/mp4">
+			</video>
+			<div class="vcaption">
+				<p>The output of the second phase.</p>
+			</div>
+
+			<video width="960" height="540" controls>
+			  <source src="Phase 3 start.mp4" type="video/mp4">
+			</video>
+			<div class="vcaption">
+				<p>The output for the first attempt of third phase.</p>
+			</div>
+
+			<video width="960" height="540" controls>
+			  <source src="Phase 3 complete.mp4" type="video/mp4">
+			</video>
+			<div class="vcaption">
+				<p>The output of the third phase.</p>
+			</div>
+
+			<video width="960" height="540" controls>
+			  <source src="Phase 3 more complete.mp4" type="video/mp4">
+			</video>
+			<div class="vcaption">
+				<p>The enhanced output of the third phase.</p>
+			</div>
+			<video width="960" height="540" controls>
+			  <source src="Phase4.mp4" type="video/mp4">
+			</video>
+			<div class="vcaption">
+				<p>The output of the fourth phase.</p>
+			</div>
+			
+			<img width="960" src="4 models.png"></img>
+			<div class="vcaption">
+				<p>A sample of rendered pictures from the models for the fourth phase.</p>
+			</div>
+
+			<img width="960" src="sketch2.png"></img>
+			<div class="vcaption">
+				<p>First phase output after asking to instantiate car, house, helicopter, and police car by pointing with handset.</p>
+			</div>
+			<img width="960" src="sketch1.png"></img>
+			<div class="vcaption">
+				<p>Second phase scene similar to the first phase scene. Showing the output after saying "put two cars left to a helicopter and next to a house".</p>
+			</div>
+			<img width="960" src="sketch3.png"></img>
+			<div class="vcaption">
+				<p>Third phase output after saying "rotate the car 90 degrees."</p>
+			</div>
+			<img width="960" src="sketch4.1.png"></img>
+			<div class="vcaption">
+				<p>Fourth phase output after saying "replace the car with a small cartoon car".</p>
+			</div>
+			<h2> References </h2>
+			<p>[1] SICS Games, Police Car & Helicopter, url: <a href="https://assetstore.unity.com/packages/3d/vehicles/land/police-car-helicopter-52496"> link </a> </p>
+			<p>[2] Azerilo, HQ Racing Car Model No.1203, url: <a href="https://assetstore.unity.com/packages/3d/vehicles/land/hq-racing-car-model-no-1203-139221"> link </a> </p>
+			<p>[3] Ferocious Industries, FREE Suburban Structure Kit, url: <a href="https://assetstore.unity.com/packages/3d/props/free-suburban-structure-kit-142401"> link </a> </p>
+			<p>[4] Ruslan, 3D Low Poly Car For Games (Tocus), url: <a href="https://assetstore.unity.com/packages/3d/vehicles/land/3d-low-poly-car-for-games-tocus-101652"> link </a> </p>
+			<p>[5] 255 pixel studios, Simple City pack plain, url: <a href="https://assetstore.unity.com/packages/3d/environments/urban/simple-city-pack-plain-1003481"> link </a> </p>
+			<p>[6] MeshInt Studio, Meshtint Free Car 01 Mega Toon Series, url: <a href="https://assetstore.unity.com/packages/3d/vehicles/land/meshtint-free-car-01-mega-toon-series-153205"> link </a> </p>
+			<p>[7] OpenAI, GPT-3 API, url: <a href="https://openai.com/blog/openai-api/"> link </a> </p>
+			<p>[8] j. Pennington, R. Socher, C.D.Mannig, GloVe: Global Vectors for Word Representation, Conference on Empirical Methods in Natural Language Processing (EMNLP), 2014</p>
+
+			<p>[9] 2021. Unity Real-Time Development Platform | 3D, 2D, VR AR Engine. https://unity.com/. Accessed: 2021-04-22.</p>
+			<p>[10] 2021. Unity Asset Store - The Best Assets for Game Making. https://assetstore.unity.com/. Accessed: 2021-04-22.</p>
+			<p>[11] Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. 2019. BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. In Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers). Association for Computational Linguistics, Minneapolis, Minnesota, 4171–4186. https://www.aclweb.org/anthology/N19-1423</p>
+
+			<p>[12] Daniel Cer, Yinfei Yang, Sheng yi Kong, Nan Hua, Nicole Limtiaco, Rhomni St. John, Noah Constant, Mario Guajardo-Cespedes, Steve Yuan, Chris Tar, Yun-Hsuan Sung, Brian Strope, and Ray Kurzweil. 2018. Universal Sentence Encoder. arXiv:1803.11175 [cs.CL]</p>
+
+
+			<p>[13] Justin Johnson, Andrej Karpathy, and Li Fei-Fei. 2016. DenseCap: Fully Convolutional Localization Networks for Dense Captioning. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition.</p>
+
+			<p>[14] 2021. Oculus Integration. https://assetstore.unity.com/packages/tools/integration/oculus-integration-82022#content/. Accessed: 2021-04-22.</p>
+
+			<p>[15] Tom B. Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, Sandhini Agarwal, Ariel Herbert-Voss, Gretchen Krueger, Tom Henighan, Rewon Child, Aditya Ramesh, Daniel M. Ziegler, Jeffrey Wu, Clemens Winter, Christopher Hesse, Mark Chen, Eric Sigler, Mateusz Litwin, Scott Gray, Benjamin Chess, Jack Clark, Christopher Berner, Sam McCandlish, Alec Radford, Ilya Sutskever, and Dario Amodei. 2020. Language Models are Few-Shot Learners. arXiv:2005.14165 [cs.CL]</p>
+
+			<p>[16] 2021. Speech-to-Text: Automatic Speech Recognition | Google Cloud. https://cloud.google.com/speech-to-text. Accessed: 2021-04-22.</p>
+
+			<p>[17] 2021. Tivoli Cloud VR. https://tivolicloud.com/. Accessed: 2021-04-22.</p>	
+
+			<p>[18] 2021. CADNAV: Free 3D models, CAD Models And Textures Download. https://www.cadnav.com/. Accessed: 2021-04-22.</p>
+
+			<p>[19] 2021. CGTrader - 3D Models for VR / AR and CG projects. https://www.cgtrader.com/. Accessed: 2021-04-22.</p>
+
+
+		</div>
+		
+	</body>
+
+</html>
