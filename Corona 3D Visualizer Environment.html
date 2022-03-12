@@ -1,0 +1,76 @@
+<!DOCTYPE hmtl>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="https://use.fontawesome.com/d1341f9b7a.js"></script>
+		<link rel="stylesheet" href="style.css">
+		<title> Coronavirus 3D environment</title>
+	</head>
+	<body>
+		<div class="topnav">
+			<a href="index.html">Home</a>
+			<a href="Publications.html">Publications</a>
+			<a href="IAT-848-Project.html">IAT 848 course project</a>
+			<!--<a href="IAT-848-Project-design.html">IAT 848 course project design</a>-->
+			<a href="IAT-848-Project-report.html">IAT 848 course project report</a>
+			<!--<a href="index1.html">Survey</a>-->
+			<a href="Level-Design.html">Level Design</a>
+			<a href="3D-Reconstruction.html">Multi view 3D Reconstruction</a>
+			<a class="active" href="Corona 3D Visualizer Environment.html"> Coronavirus 3D Environment</a>
+
+		</div>
+		<div class="box1">
+			<img width="960" src="Corona 3D Visualizer.png"></img>
+			<br/><br/><br/><br/><br/><br/><br/><br/>
+			<h1> Corona 3D Environment</h1>
+			<h1> Mahdi Davoodikakhki </h1>
+			<h1> Prof. Steve DiPaola </h1>
+			<h1> Prof. Chris Shaw </h1>
+			<br/><br/><br/><br/><br/><br/><br/><br/>
+			
+
+
+			
+			<h2>Introduction</h2>
+			<p>This project is written amid the pandemic to show the different statistics regarding the virus spread and the fatalities and encourage people to stay at home.
+			Moreover, the users will be able to compare up to 10 different countries in overcoming the virus challenges by adding or removing them to the plots.</p>
+			<p>The 2D plots could be hard to understand and with having multiple of these plots it is hard to compare subjects with different criteria.
+			With 3D plots, users can see several of these plots in one view or focus only on one of them. They can also hide or unhide the legends with a press of a button.</p>
+			
+			<h2>Project Description</h2>
+			<p>We have designed a 3D environment having six 3D plots showing New Cases, New Cases per million, New Deaths, New Deaths per million, Cumulative Cases, and Cumulative Deats for the last 30 days.</p>
+			<p>In addition, there is also a flat-screen that you can add or remove countries to the 3D plots. The users can freely explore the environment by walking around the room with the keyboard buttons.</p>
+			<p> The users can also choose to look at 2D graphs by pressing the 'G' buttons, which changes the image posters behind the 3D plots in the environment into the 2D graphs showing the same data.</p>
+			
+			<h2>Key Features </h2>
+			<p>The key features in this project are having 3D and 2D plots, adding or removing countries, and walking around the environment to see and focus on different types of data.
+			
+			<h2> Implementing the Project</h2>
+			<p>We have implemented the project using Processing software and Java programming languages to create our 3D world and objects. We sort the countries based on the mean of their data and put the countries with the largest values in the last rows and the lowest ones in the first rows to help the users see the data easier.</p>
+			<p>We also used transparent materials for the plots to let the users see through the data plot columns. This could be helpful if there is any smaller column behind the columns closer to the users.</p>
+			<p> Every time the code starts running we will download the recent COVID spread data from [1] and we will use the 2019 world population prospects for having a fair comparison between countries.</p> 
+			<h2>Detailed workflow</h2>
+			<p>We implemented our project in five phases. We first created the room, which has 6 walls, a floor, a ceiling, and the base objects for the 3D plots. There is also a place for the posters on each wall.</p>
+			<p>For the second phase, we implemented the functions for downloading and reading the up-to-date Covid data and the countries population. In the next phase, we focused on moving the camera around the room and showing 3D and 2D plots. </p>
+			<p>For the fourth phase, we added the feature that lets the user add or remove countries by implementing the mouse ray and plane collisions. For the last phase, we focused on bringing images, adding legends, and adding sounds to the project to improve the user experience.</p>
+			<p>We implemented the project in two weeks in November and December 2020.
+			
+			<h2>Demo</h2>
+			<p>Here, you can see a short demo of our Coronavirus data visualization demo.</p>
+			<video width="960" height="540" controls>
+			  <source src="Processing_3D_Corona_Environment.mp4" type="video/mp4">
+			</video>
+			<br><br>
+			<h2></h2>
+			<h2>Future work</h2>
+			<p>For the future work, we would like to implement our project for a VR headset to improve the user experience and interaction. We would also like to add textures and other objects such as actual light objects to improve the environment aestethics. In addition, we could have more than 20 countries to let the users choose from them.</p>
+			
+			<h2>References</h2>
+			<p>[1]. WHO COVID 19 global data, <a href="https://covid19.who.int/WHO-COVID-19-global-data.csv"> https://covid19.who.int/WHO-COVID-19-global-data.csv </a>, accessed on: December 12 2020</p>
+			<p>[2]. United Nations World Population Prospects 2019, <a href ="https://population.un.org/wpp/Download/Standard/CSV/">https://population.un.org/wpp/Download/Standard/CSV/</a> , accessed on: December 12 2020</p>
+			<p>
+		</div>
+		
+	</body>
+
+</html>
