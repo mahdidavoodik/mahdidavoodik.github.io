@@ -1,0 +1,428 @@
+<!DOCTYPE hmtl>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="https://use.fontawesome.com/d1341f9b7a.js"></script>
+		<link rel="stylesheet" href="style.css">
+		<title>Hierarchical Action Classification with Network Pruning</title>
+	</head>
+	<body>
+		<div class="topnav">
+			<a href="index.html">Home</a>
+			<a href="Publications.html">Publications</a>
+			<a href="IAT-848-Project.html">IAT 848 course project</a>
+			<!--<a href="IAT-848-Project-design.html">IAT 848 course project design</a>-->
+			<a href="IAT-848-Project-report.html">IAT 848 course project report</a>
+			<!--<a href="index1.html">Survey</a>-->
+			<a href="Level-Design.html">Level Design</a>
+			<a href="3D-Reconstruction.html">Multi view 3D Reconstruction</a>
+			<a href="Corona-3D-Visualizer-Environment.html">Coronavirus 3D Environment</a>
+			<a class="active" href="Hierarchical_Action_Classification_With_Network_Pruning.html">Action Classification</a>
+		</div>
+		<div class="box1">
+			<!--<img width="960" src="Title.png"></img>-->
+			<br/><br/><br/><br/><br/><br/><br/><br/>
+			<h1> Hierarchical Action Classification with Network Pruning</h1>
+			<h1> Mahdi Davoodikakhki </h1>
+			<h1> KangKang Yin </h1>
+			<br>
+				
+			<p>Research on human action classification has made significant progresses in the past few years.
+Most deep learning methods focus on improving performance by adding more network components.
+We propose, however, to better utilize auxiliary mechanisms, including hierarchical classification,
+network pruning, and skeleton-based preprocessing, to boost the model robustness and performance.
+We test the effectiveness of our method on four commonly used testing datasets: NTU RGB+D 60[1],
+NTU RGB+D 120[2], Northwestern-UCLA Multiview Action 3D[3], and UTD Multimodal Human Action
+Dataset[4]. Our experiments show that our method can achieve either comparable or better performance
+on all four datasets. In particular, our method sets up a new baseline for NTU 120, the largest dataset
+among the four. We also analyze our method with extensive comparisons and ablation studies</p>
+			<h2>Method</h2>
+			<p>Here, we briefly describe our method and encourage the readers to read our paper[5] for deeper explanations.</p>
+			<h3>Network Model</h3>
+			<p>We build our network on top of the Glimpse Clouds network[6] and take advantage of 
+			cropping the area around people in the video (video cropping), Hierarchical Classification, and Network Pruning to improve the accuracy.
+			Hierarchical Classification could help with extracting more meaningful features in the initial stacks and Network Pruning could be beneficial
+			in overcoming overparameterization.</p>
+			<figure>
+			  <img src="neural_network_model.png" style="width:50%">
+			  <figcaption> Structure of our neural network model. The levels contain superclasses each having a separate subset of classes.</figcaption>
+			</figure>
+			<h3>Superclasses</h3>
+			<p>To encourage our network in extracting features gradually, we make 4 levels each containing superclasses, which have the same number of classes in each level.
+			We first train our model without any hierarchical classification and obtain the similarities among the classes.
+			We then try to put the most similar classes in the same superclass to make the classification easier on levels and gradually make the task harder.
+			To obtain the superclasses, we uniformly put the classes randomly in superclasses and then use a greedy algorithm to change the swap the classes that have the most effect in decreasing similarities between superclasses.</p>
+			<p> We continue the algorithm until no improvement could be achieved. We also repeat the algorithm 1000 times and use the best obtained result for the superclasses configuration in each level.</p>
+			<figure>
+			  <img src="NUCLA_classes_legend1.png" style="width:40%">
+			  <figcaption> N-UCLA: all 10 action classes and the derived superclasses.</figcaption>
+			</figure>
+			<h2>Results</h2>
+			<p>Here, we compare our method with the recent publications. We have achieved state-of-the-art results in most comparisons. We have provided more analysis and ablation
+			studies on the backpropagated gradients, superclasses size, and percentage of pruning in our paper and we again encourage the readers to look at our paper for more details.[5] </p>
+			<br>
+			<center><table style="width:50%">
+			  <caption style="caption-side:bottom">Comparison on NTU 60. – indicates no results available.</caption>
+			  <tr>
+				<th>Method</th>
+				<th>Year</th>
+				<th>Pose Input</th>
+				<th>RGB Input</th>
+				<th>Cross-View</th>
+				<th>Cross-Subject</th>
+				
+			  </tr>
+			  <tr>
+				<td>Glimpse Clouds[6]</td>
+				<td><center>2018</center></td>
+				<td><center></center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>93.2%</center></td>
+				<td><center>86.6%</center></td>
+			  </tr>
+			  <tr>
+				<td>FGCN[7]</td>
+				<td><center>2020</center></td>
+				<td><center>&#10004;</center></td>
+				<td></td>
+				<td><center>96.25%</center></td>
+				<td><center>90.22%</center></td>
+			  </tr>
+			  <tr>
+			    <td>MS-G3D Net[8]</td>
+				<td><center>2020</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center></center></td>
+				<td><center>96.2%</center></td>
+				<td><center>91.5%</center></td>
+			  </tr>
+			  <tr>
+			    <td>PoseMap[9]</td>
+				<td><center>2018</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>95.26%</center></td>
+				<td><center>91.71%</center></td>
+			  </tr>
+			  <tr>
+			    <td>MMTM[10]</td>
+				<td><center>2019</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>-</center></td>
+				<td><center>91.71%</center></td>
+			  </tr>
+			  <tr>
+			    <td>Action Machine[11]</td>
+				<td><center>2019</center></td>
+				<td><center></center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>97.2%</center></td>
+				<td><center>94.3%</center></td>
+			  </tr>
+			  <tr>
+			    <td>PGCN[12]</td>
+				<td><center>2019</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>-</center></td>
+				<td><center><b>96.4%</b></center></td>
+			  </tr>
+			  <tr>
+			    <td>Ours</td>
+				<td><center>2020</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center><b>98.79%</b></center></td>
+				<td><center>95.66%</center></td>
+			  </tr>
+			</table></center>
+			<br>
+			<center><table style="width:50%">
+			  <caption style="caption-side:bottom">Comparison on NTU 120. * indicates results obtained from author-released code.</caption>
+			  <tr>
+				<th>Method</th>
+				<th>Year</th>
+				<th>Pose Input</th>
+				<th>RGB Input</th>
+				<th>Cross-View</th>
+				<th>Cross-Subject</th>
+				
+			  </tr>
+			  <tr>
+				<td>Action Machine[11]</td>
+				<td><center>2019</center></td>
+				<td></td>
+				<td><center>&#10004;</center></td>
+				<td><center>-</center></td>
+				<td><center>-</center></td>
+			  </tr>
+			  <tr>
+				<td>TSRJI[13]</td>
+				<td><center>2019</center></td>
+				<td><center>&#10004;</center></td>
+				<td></td>
+				<td><center>62.8%</center></td>
+				<td><center>67.9%</center></td>
+			  </tr>
+			  <tr>
+			    <td>PoseMap from Papers with Code[14]</td>
+				<td><center>2019</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>66.9%</center></td>
+				<td><center>64.6%</center></td>
+			  </tr>
+			  <tr>
+			    <td>SkeleMotion[15]</td>
+				<td><center>2019</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>66.9%</center></td>
+				<td><center>67.7%</center></td>
+			  </tr>
+			  <tr>
+			    <td>GVFE + AS-GCN with DH-TCN[16]</td>
+				<td><center>2018</center></td>
+				<td><center></center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>79.8%</center></td>
+				<td><center>78.3%</center></td>
+			  </tr>
+			  <tr>
+			    <td>Glimpse Clouds[6]</td>
+				<td><center>2020</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>83.84%*</center></td>
+				<td><center>93.52%*</center></td>
+			  </tr>
+			  <tr>
+			    <td>FGCN[7]</td>
+				<td><center>2020</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>87.4%</center></td>
+				<td><center>85.4%</center></td>
+			  </tr>
+			  <tr>
+			    <td>MS-G3D Net[8]</td>
+				<td><center>2020</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>88.4%</center></td>
+				<td><center>86.9%</center></td>
+			  </tr>
+			  <tr>
+			    <td>Ours</td>
+				<td><center>2020</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center><b>94.54%</b></center></td>
+				<td><center><b>93.69%</b></center></td>
+			  </tr>
+			</table></center>
+			<br>
+		
+		<center><table style="width:50%">
+			  <caption style="caption-side:bottom">Comparison on UTD-MHAD. * indicates results obtained from author-released code. The Pre-trained column indicates if the model was pre-trained on ImageNet and/or a bigger human action dataset.</caption>
+			  <tr>
+				<th>Method</th>
+				<th>Year</th>
+				<th>Pre-trained</th>
+				<th>Pose Input</th>
+				<th>RGB Input</th>
+				<th>Cross-Subject</th>
+				
+			  </tr>
+			  
+			  <tr>
+				<td>Glimpse Clouds[6]</td>
+				<td><center>2018</center></td>
+				<td><center>&#10004;</center></td>
+				<td></td>
+				<td><center>&#10004;</center></td>
+				<td><center>84.19%*</center></td>
+			  </tr>
+			  <tr>
+			    <td>JTM[17]</td>
+				<td><center>2016</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center></center></td>
+				<td><center>85.81%</center></td>
+			  </tr>
+			  <tr>
+			    <td>Optical Spectra[18]</td>
+				<td><center>2018</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center></center></td>
+				<td><center>86.97%</center></td>
+			  </tr>
+			  <tr>
+			    <td>JDM[19]</td>
+				<td><center>2017</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center></center></td>
+				<td><center>88.10%</center></td>
+			  </tr>
+			  <tr>
+			    <td>Action Machine Archived Version[20]</td>
+				<td><center>2019</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center></center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>92.5%*</center></td>
+			  </tr>
+			  <tr>
+			    <td>PoseMap[9]</td>
+				<td><center>2018</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center><b>94.51%</b></center></td>
+			  </tr>
+			  <tr>
+			    <td>Ours[21]</td>
+				<td><center>2020</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>91.63%</center></td>
+			  </tr>
+			  
+			</table></center>
+			<br>
+		
+		
+		<center><table style="width:50%">
+		   <caption style="caption-side:bottom">Comparison on N-UCLA. – indicates no results available. The Pre-trained column indicates if the model was pre-trained on ImageNet and/or a bigger human action dataset.</caption>
+			  <tr>
+				<th>Method</th>
+				<th>Year</th>
+				<th>Pre-trained</th>
+				<th>Pose Input</th>
+				<th>RGB Input</th>
+				<th>View1</th>
+				<th>View2</th>
+				<th>View3</th>
+				<th>Average</th>
+				
+			  </tr>
+			  
+			  
+			  <tr>
+				<td>Ensemble TS-LSTM[22]</td>
+				<td><center>2017</center></td>
+				<td><center></center></td>
+				<td><center>&#10004;</center></td>
+				<td><center></center></td>
+				<td><center>-</center></td>
+				<td><center>-</center></td>
+				<td><center>89.22%</center></td>
+				<td><center>-</center></td>
+			  </tr>
+			  <tr>
+				<td>EleAtt-GRU(aug.)[23]</td>
+				<td><center>2018</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center></center></td>
+				<td><center>-</center></td>
+				<td><center>-</center></td>
+				<td><center>90.7%</center></td>
+				<td><center>-</center></td>
+			  </tr>
+			  <tr>
+				<td>Enhanced Viz.[24]</td>
+				<td><center>2017</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center></center></td>
+				<td><center>-</center></td>
+				<td><center>-</center></td>
+				<td><center>92.61%</center></td>
+				<td><center>-</center></td>
+			  </tr>
+			  <tr>
+				<td>Glimpse Clouds[6]</td>
+				<td><center>2018</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center></center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>83.4%</center></td>
+				<td><center>89.5%</center></td>
+				<td><center>90.1%</center></td>
+				<td><center>87.6%</center></td>
+			  </tr>
+			  <tr>
+				<td>FGCN[7]</td>
+				<td><center>2020</center></td>
+				<td><center></center></td>
+				<td><center>&#10004;</center></td>
+				<td><center></center></td>
+				<td><center>-</center></td>
+				<td><center>-</center></td>
+				<td><center>95.3%</center></td>
+				<td><center>-</center></td>
+			  </tr>
+			  <tr>
+				<td>Action Machine[11]</td>
+				<td><center>2019</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center></center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>88.3%</center></td>
+				<td><center><b>92.2%</b></center></td>
+				<td><center>96.5%</center></td>
+				<td><center>92.3%</center></td>
+			  </tr>
+			  <tr>
+				<td>Ours</td>
+				<td><center>2020</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center>&#10004;</center></td>
+				<td><center><b>91.10%</b></center></td>
+				<td><center>91.95%</center></td>
+				<td><center><b>98.92%</b></center></td>
+				<td><center><b>93.99%</b></center></td>
+			  </tr>
+		</table></center>
+		<br>
+	<h1>References</h1>
+	<p>[1]Shahroudy, A., Liu, J., Ng, T., Wang, G.: Ntu rgb+d: A large scale dataset for 3d human activity analysis. In: CVPR. pp. 1010–1019 (2016)<p>
+	<p>[2]Liu, J., Shahroudy, A., Perez, M.L., Wang, G., Duan, L.Y., Kot Chichung, A.: Ntu rgb+d 120: A large-scale benchmark for 3d human activity understanding. IEEE Transactions on Pattern Analysis and Machine Intelligence (2019)</p>
+	<p>[3]J. Wang, X. Nie, Y. Xia, Y. Wu, and S. Zhu. Cross-view action modeling, learning, and recognition. IEEE Conference on Computer Vision and Pattern Recognition, pages 2649–2656, 2014.</p>
+	<p>[4]C. Chen, R. Jafari, and N. Kehtarnavaz. Utd-mhad: A multimodal dataset for human action recognition utilizing a depth camera and a wearable inertial sensor. In IEEE International Conference on Image Processing, pages 168–172, 2015.</p>
+	<p>[5]Hierarchical Action Classification with Network Pruning, Mahdi Davoodikakhki and KangKang Yin. 15th International Symposium on Visual Computing (ISVC 2020).</p>
+	<p>[6]Fabien Baradel, Christian Wolf, Julien Mille, and Graham W. Taylor. Glimpse clouds: Human activity recognition from unstructured feature points. IEEE Conference on Computer Vision and Pattern Recognition, 2018.</p>
+	<p>[7]Hao Yang, Dan Yan, Li Zhang, Dong Li, YunDa Sun, ShaoDi You, and Stephen J. Maybank. Feedback graph convolutional network for skeleton-based action recognition, 2020.</p>
+	<p>[8]Ziyu Liu, Hongwen Zhang, Zhenghao Chen, Zhiyong Wang, and Wanli Ouyang. Disentangling and unifying graph convolutions for skeleton-based action recognition, 2020.</p>
+	<p>[9]M. Liu and J. Yuan. Recognizing human actions as the evolution of pose estimation maps. In IEEE Conference on Computer Vision and Pattern Recognition, pages 1159–1168, 2018.</p>
+	<p>[10]Hamid Reza Vaezi Joze, Amirreza Shaban, Michael L. Iuzzolino, and Kazuhito Koishida. Mmtm: Multimodal transfer module for cnn fusion, 2019.</p>
+	<p>[11]Jiagang Zhu, Wei Zou, Zhu Zheng, Liang Xu, and Guan Huang. Action machine: Toward person-centric action recognition in videos. IEEE Signal Processing Letters, PP, 2019.</p>
+	<p>[12]Lei Shi, Yifan Zhang, Jian Cheng, and Han-Qing Lu. Action recognition via pose-based graph convolutional networks with intermediate dense supervision. ArXiv, abs/1911.12509, 2019.</p>
+	<p>[13]Carlos Caetano, Francois Bremond, and William Robson Schwartz. Skeleton image representation for 3d action recognition based on tree structure and reference joints. SIBGRAPI Conference on Graphics, Patterns and Images, 2019.</p>
+	<p>[14]M. Liu and J. Yuan. Recognizing human actions as the evolution of pose estimation maps. https://paperswithcode.com/paper/recognizing-human-actions-as-the-evolution-of. Accessed: 2020-05-12.</p>
+	<p>[15]Carlos Caetano, Jessica Sena, Franeois Bremond, Jefersson A. Dos Santos, and William Robson Schwartz. Skelemotion: A new representation of skeleton joint sequences based on motion information for 3d action recognition. IEEE International Conference on Advanced Video and Signal Based Surveillance, 2019.</p>
+	<p>[16]Konstantinos Papadopoulos, Enjie Ghorbel, Djamila Aouada, and Björn Ottersten. Vertex feature encoding and hierarchical temporal modeling in a spatial-temporal graph convolutional network for action recognition, 2019.</p>
+	<p>[17]Pichao Wang, Zhaoyang Li, Yonghong Hou, and Wanqing Li. Action recognition based on joint trajectory maps using convolutional neural networks. ACM International Conference on Multimedia, 2016.</p>
+	<p>[18]Y. Hou, Z. Li, P. Wang, and W. Li. Skeleton optical spectra-based action recognition using convolutional neural networks. IEEE Transactions on Circuits and Systems for Video Technology, 28(3):807–811, 2018.</p>
+	<p>[19]C. Li, Y. Hou, P. Wang, and W. Li. Joint distance maps based action recognition with convolutional neural networks. IEEE Signal Processing Letters, 24(5):624–628, 2017.</p>
+	<p>[20]Jiagang Zhu, Wei Zou, Liang Xu, Yiming Hu, Zheng Zhu, Manyu Chang, Junjie Huang, Guan Huang, and Dalong Du. Action machine: Rethinking action recognition in trimmed videos, 2018.</p>
+	<p>[21]Hierarchical Action Classification with Network Pruning, Mahdi Davoodikakhki and KangKang Yin. ArXiv</p>
+	<p>[22]Lee, I., Kim, D., Kang, S., Lee, S.: Ensemble deep learning for skeleton-based action recognition using temporal sliding lstm networks. In: ICCV. pp. 1012–1020 (2017)</p>
+	<p>[23]Pengfei Zhang, Jianru Xue, Cuiling Lan, Wenjun Zeng, Zhanning Gao, and Nanning Zheng. Adding attentiveness to the neurons in recurrent neural networks. In Proceedings of the European Conference on Computer Vision, pages 135–151, 2018.</p>
+	<p>[24]Mengyuan Liu, Hong Liu, and Chen Chen. Enhanced skeleton visualization for view invariant human action recognition. Pattern Recognition, 03 2017.</p>
+	
+
+
+	
+
+	</div>
+	</body>
+
+</html>

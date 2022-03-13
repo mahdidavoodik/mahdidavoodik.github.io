@@ -129,7 +129,9 @@ body{
 	font-family: Times New Roman;
 
 }
-
+.box1 table, th, td {
+  border:1px solid black;
+}
 
 .vcaption p{
 	font-size: 16px;
